@@ -1,0 +1,23 @@
+
+
+.topper{
+	margin: 0 auto;
+	padding-top: 70px;
+}
+
+.topper2{
+	margin: 0 auto;
+	padding-top: 30px;
+}
+
+.myimg{
+	position: absolute;
+	float: right;	
+}
+
+.mylabel{
+	padding-top: 5px;
+	text-align: center;
+}
+
+

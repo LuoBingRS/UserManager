@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tony.dao.WordDao">
+
+	<!-- User实体类、User表映射,注意实体类User和表名应该一致,字段下面可配置 -->
+	<resultMap id="WordModelMap" type="com.tony.model.WordModel">
+		<result property="wordid" column="wordid" />
+		<result property="word" column="word" />
+	</resultMap>
+
+	<!-- 将UserDao中的方法进行配置，id=方法名称，parameterType=参数类型，resultMap返回的结果
+	，当用户使用UserDao中的方法时，mybaties自己会找相应配置文件中的对数据库的操作 -->
+	
+	<!-- 将UserDao中的方法进行配置，id=方法名称，parameterType=参数类型，resultMap返回的结果
+	，当用户使用UserDao中的方法时，mybaties自己会找相应配置文件中的对数据库的操作 -->
+	<insert id="insertWord" parameterType="WordModel">
+		INSERT INTO USERLIST(
+			word
+		)
+		VALUES (
+			#{word}
+		)
+	</insert>
+	
+	<!-- 返回一个上面的 resultMap实例,这里的resultMap要与上面的配置的resultMap中的id一致 -->
+	<select id="queryAllWord" resultMap="WordModelMap">
+		SELECT * FROM WORD
+	</select>
+	
+	<!-- 删除信息 -->
+	<delete id="delWord" parameterType="WordModel">
+		DELETE FROM WORD WHERE
+		wordid = #{wordid}
+	</delete>
+	
+	<update id="updateWord" parameterType="WordModel" >
+		UPDATE WORD SET
+			word = #{word}
+		WHERE wordid = #{wordid}
+	</update>
+	
+</mapper>

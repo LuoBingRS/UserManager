@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tony.dao.UserDao">
+
+	<!-- User实体类、User表映射,注意实体类User和表名应该一致,字段下面可配置 -->
+	<resultMap id="UserMap" type="com.tony.model.User">
+		<result property="userid" column="userid" />
+		<result property="name" column="name" />
+		<result property="phonenumber" column="phonenumber" />
+		<result property="sex" column="sex" />
+		<result property="salary" column="salary" />
+		<result property="birthday" column="birthday" />
+		<result property="department" column="department" />
+		<result property="bossid" column="bossid" />
+	</resultMap>
+
+	<!-- 将UserDao中的方法进行配置，id=方法名称，parameterType=参数类型，resultMap返回的结果
+	，当用户使用UserDao中的方法时，mybaties自己会找相应配置文件中的对数据库的操作 -->
+	<insert id="insert" parameterType="User">
+		INSERT INTO USERLIST(
+			userid,
+			name,
+			sex,
+			phonenumber,
+			birthday,
+			salary,
+			department,
+			bossid
+		)
+		VALUES (
+			#{userid},
+			#{name},
+			#{sex},
+			#{phonenumber},
+			#{birthday},
+			#{salary},
+			#{department},
+			#{bossid}
+		)
+	</insert>
+
+	<!-- 返回一个上面的 resultMap实例,这里的resultMap要与上面的配置的resultMap中的id一致 -->
+	<select id="queryUsers" resultMap="UserMap">
+		SELECT * FROM USERLIST
+	</select>
+
+	<!-- 删除信息 -->
+	<delete id="delUser" parameterType="User">
+		DELETE FROM USERLIST WHERE
+		userid = #{userid}
+	</delete>
+
+	<update id="update" parameterType="User" >
+		UPDATE USERLIST SET
+			name = #{name},
+			phonenumber = #{phonenumber},
+			sex = #{sex},
+			salary = #{salary},
+			birthday = #{birthday},
+			department = #{department},
+			bossid = #{bossid} 
+		WHERE userid = #{userid}
+	</update>
+
+	<select id="queryUserById" parameterType="int" resultMap="UserMap">
+		SELECT * FROM USERLIST WHERE userid = #{userid}
+	</select>
+	<select id="queryUserByUserid" parameterType="int" resultMap="UserMap">
+		SELECT * FROM USERLIST WHERE userid = #{userid}
+	</select>
+	
+	<select id="queryUserByName" parameterType="String" resultMap="UserMap">
+		SELECT * FROM USERLIST WHERE name = #{name}
+	</select>
+	<select id="queryUserBySex" parameterType="String" resultMap="UserMap">
+		SELECT * FROM USERLIST WHERE sex = #{sex}
+	</select>
+
+</mapper>
